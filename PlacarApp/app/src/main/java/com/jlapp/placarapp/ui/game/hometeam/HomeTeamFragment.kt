@@ -1,11 +1,13 @@
 package com.jlapp.placarapp.ui.game.hometeam
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 import com.jlapp.placarapp.R
 import com.jlapp.placarapp.ui.game.awayteam.AwayTeamFragment
@@ -34,8 +36,15 @@ class HomeTeamFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btNextStep.setOnClickListener {
-            nextScreen()
+            sendHomeTeamName()
+//            nextScreen()
         }
+    }
+
+    private fun sendHomeTeamName() {
+        val intent = Intent("FILTER_HOME_TEAM")
+        intent.putExtra("home_team", inputHomeTeam.text.toString())
+        LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
     }
 
     private fun nextScreen() {
