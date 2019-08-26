@@ -3,7 +3,7 @@ package com.jlapp.jokenpo.ui.game
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jlapp.jokenpo.R
-import kotlin.random.Random
+import java.util.*
 
 class GameViewModel : ViewModel() {
     val playerName = MutableLiveData<String>()
@@ -20,7 +20,7 @@ class GameViewModel : ViewModel() {
     }
 
     fun generateAndroidSelection() {
-        val randomNumber = Random(3).nextInt()
+        val randomNumber = (0..2).random()
         setAndroidSelectedImage(randomNumber)
     }
 

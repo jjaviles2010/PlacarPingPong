@@ -6,14 +6,14 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.jlapp.jokenpo.R
-import com.jlapp.jokenpo.ui.game.match.MatchFragment
 import com.jlapp.jokenpo.ui.game.player.PlayerFragment
-import kotlinx.android.synthetic.main.fragment_match.*
+import kotlinx.android.synthetic.main.activity_game.*
 
 class GameActivity : AppCompatActivity() {
 
@@ -28,6 +28,28 @@ class GameActivity : AppCompatActivity() {
         registerObserver()
 
         setExtras()
+
+        configureButtonEvents()
+    }
+
+    private fun configureButtonEvents() {
+        ivPaper.setOnClickListener {
+            executePlay(it)
+        }
+
+        ivFist.setOnClickListener {
+            executePlay(it)
+        }
+
+        ivVictory.setOnClickListener {
+            executePlay(it)
+        }
+    }
+
+    private fun executePlay(it: View) {
+        gameViewModel.generateAndroidSelection()
+        gameViewModel.setPlayerSelectedImage(it.id)
+        gameViewModel.calculateResult()
     }
 
     private fun setExtras() {
